@@ -1,0 +1,14 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# env files
+*/.env  
+*/.env.local
+*/.env.development.local
+*/.env.test.local
+*/.env.production.local
+
+/spark-logs
+/airflow/logs
