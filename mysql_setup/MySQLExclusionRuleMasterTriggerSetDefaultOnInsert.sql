@@ -1,7 +1,7 @@
 DELIMITER $$
-DROP TRIGGER IF EXISTS set_defaults_on_insert_exclusion_rule_master;
-CREATE TRIGGER set_defaults_on_insert_exclusion_rule_master
-BEFORE INSERT ON exclusion_rule_master
+DROP TRIGGER IF EXISTS mysql_source.set_defaults_on_insert_exclusion_rule_master;
+CREATE TRIGGER mysql_source.set_defaults_on_insert_exclusion_rule_master
+BEFORE INSERT ON mysql_source.exclusion_rule_master
 FOR EACH ROW
 BEGIN
     -- Set action to 'i' if it's not provided

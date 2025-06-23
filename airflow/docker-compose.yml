@@ -19,12 +19,13 @@ x-airflow-common:
     AIRFLOW__WEBSERVER__CSRF_ENABLED: 'false'
     AIRFLOW__WEBSERVER__X_FRAME_ENABLED: 'false'
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
-    DOCKER_HOST: tcp://host.docker.internal:2375  # Allows access to Docker from inside Airflow
+    AIRFLOW__WEBSERVER__SECRET_KEY: xO7v_1J5q9B9jzPbRMp8gL0RW5o3M6SmfJ0Z8YjFnJU
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+    - /var/run/docker.sock:/var/run/docker.sock
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
@@ -71,6 +72,7 @@ services:
       <<: *airflow-common-depends-on
     volumes:
       - ${AIRFLOW_PROJ_DIR:-.}/webserver_config.py:/opt/airflow/webserver_config.py
+      - /var/run/docker.sock:/var/run/docker.sock
 
   airflow-scheduler:
     <<: *airflow-common

@@ -1,7 +1,7 @@
 DELIMITER $$
-DROP TRIGGER IF EXISTS set_defaults_on_insert_schema_master;
-CREATE TRIGGER set_defaults_on_insert_schema_master
-BEFORE INSERT ON schema_master
+DROP TRIGGER IF EXISTS mysql_source.set_defaults_on_insert_schema_master;
+CREATE TRIGGER mysql_source.set_defaults_on_insert_schema_master
+BEFORE INSERT ON mysql_source.schema_master
 FOR EACH ROW
 BEGIN
     -- Set action to 'i' if it's not provided
