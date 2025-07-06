@@ -1,44 +1,29 @@
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
+import React, { useState } from "react";
+import { PrimeReactProvider } from 'primereact/api';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Box } from '@mui/material';
-import Navbar from './components/Navbar';
-import Dashboard from './pages/Dashboard';
-import DataMigrationForm from './components/DataMigrationForm';
+import SidebarMenu from "./components/Sidebar/Sidebar.jsx";
+import Dashboard from "./pages/Dashboard";
+import "./App.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 
-const theme = createTheme({
-  palette: {
-    mode: 'light',
-    primary: {
-      main: '#1976d2',
-    },
-    secondary: {
-      main: '#dc004e',
-    },
-  },
-});
+export default function App() {
+  const [collapsed, setCollapsed] = useState(false);
 
-function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
+    <PrimeReactProvider>
       <Router>
-        <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-          <Navbar />
-          <Box component="main" sx={{ flexGrow: 1, pt: 8 }}>
+        <div style={{ display: "flex", minHeight: "100vh" }}>
+          <SidebarMenu collapsed={collapsed} setCollapsed={setCollapsed} />
+          <main className="main-content" style={{ flex: 1, padding: "20px", background: "#f9fafb" }}>
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/source" element={<div>Source Systems</div>} />
-              <Route path="/target" element={<div>Target Systems</div>} />
-              <Route path="/pipeline" element={<div>Pipeline Management</div>} />
-              <Route path="/transformation" element={<div>Transformation Rules</div>} />
-              <Route path="/full-migration" element={<DataMigrationForm />} />
+              {/* Add more routes here */}
             </Routes>
-          </Box>
-        </Box>
+          </main>
+        </div>
       </Router>
-    </ThemeProvider>
+    </PrimeReactProvider>
   );
 }
-
-export default App;
