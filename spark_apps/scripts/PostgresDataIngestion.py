@@ -15,6 +15,7 @@ def initialize_spark():
 def load_config():
     """Load configuration from environment variables"""
     load_dotenv()
+    print(os.getenv("POSTGRES_DATABASE"))
     return {
         'source_db_name': "mysql",
         'target_db_name': "postgres",

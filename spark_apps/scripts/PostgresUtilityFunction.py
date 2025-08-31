@@ -19,7 +19,7 @@ postgres_user = os.getenv("POSTGRES_USERNAME")
 postgres_password = os.getenv("POSTGRES_PASSWORD")
 
 def execute_query(query):
-    postgres_connection_url = f"postgresql://{postgres_user}:{postgres_password}@{postgres_host}:{postgres_port}"
+    postgres_connection_url = f"postgresql://{postgres_user}:{postgres_password}@{postgres_host}:{postgres_port}/{postgres_db}"
     # Create an SQLAlchemy engine with connection pooling
     engine = create_engine(
         postgres_connection_url,

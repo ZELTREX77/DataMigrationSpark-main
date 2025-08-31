@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 import "./SidebarMenu.css";
 import { Badge } from "primereact/badge";
 
@@ -30,25 +31,27 @@ export default function SidebarMenu() {
   const toggleSidebar = () => setCollapsed((prev) => !prev);
 
   return (
-    <div className="container">
+    <div className="container" style={{height: "98vh"}}>
       <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
         <div className="sidebar-content">
           {!collapsed && <h1>Data Migration</h1>}
 
-          {sections.map((section, index) => (
+      {sections.map((section, index) => (
             <div key={index} className="sidebar-section">
               {!collapsed && (
                 <div className="sidebar-section-title">{section.title}</div>
               )}
               {section.items.map((item, i) => (
                 <div key={i} className="sidebar-item">
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <i className={item.icon}></i>
-                    {!collapsed && <span>{item.label}</span>}
-                  </div>
-                  {!collapsed && item.badge && (
-                    <span className="badge">{item.badge}</span>
-                  )}
+                  <Link to={item.label === 'Dashboard' ? '/' : item.label === 'Transformations' ? '/transformations' : '#'} style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <i className={item.icon}></i>
+                      {!collapsed && <span>{item.label}</span>}
+                    </div>
+                    {!collapsed && item.badge && (
+                      <span className="badge">{item.badge}</span>
+                    )}
+                  </Link>
                 </div>
               ))}
             </div>
@@ -57,7 +60,7 @@ export default function SidebarMenu() {
 
         {/* Toggle Button at Bottom */}
         <button className="toggle-btn" onClick={toggleSidebar}>
-          <i className={`pi ${collapsed ? "pi-angle-right" : "pi-angle-left"}`} />
+          <i style = {{color : "cadetblue"}} className={`pi ${collapsed ? "pi-angle-right" : "pi-angle-left"}`} />
         </button>
       </aside>
 
